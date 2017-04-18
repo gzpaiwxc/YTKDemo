@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#303F9F</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="flag_color">#00CDCD</color>
+    <!--蓝色-->
+    <color name="bg_blue_color">#68b6f2</color>
+    <!--浅绿色-->
+    <color name="bg_aqua_color">#C0EDFF</color>
+    <!--灰色-->
+    <color name="gray">#F5F5F5</color>
+    <!--红色-->
+    <color name="red">#f94242</color>
+</resources>
