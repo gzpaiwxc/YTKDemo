@@ -26,7 +26,9 @@ import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 public class GSWMXActivity extends AppCompatActivity {
-    public String[] bodys = {
+    public String[] bodys = {"Draw your _____ please, Li Jing.",
+            "It is a _____. It has long _____.",
+            "It is a _____. It has long _____.It is a _____. It has long _____.It is a _____. It has long _____.",
             "（2016南昌一模）万里悲秋常作客，*input。（杜甫《登高》）"
             , "（2016南昌一模）别有幽愁暗恨生，*input。（白居易《琵琶行》）"
             , "（2016南昌一模）想当年，金戈铁马，*input。（辛弃疾《京口贝古亭怀古》）"
@@ -95,7 +97,6 @@ public class GSWMXActivity extends AppCompatActivity {
                 .subscribe(new Action1<EventUpdateAnswer>() {
                     @Override
                     public void call(EventUpdateAnswer eventUpdateAnswer) {
-                        Log.d("lianshou", "eventUpdateAnswer.chooseItem"+eventUpdateAnswer.chooseItem.toString());
                         dataMap.put(eventUpdateAnswer.chooseItem.index, eventUpdateAnswer.chooseItem);
                     }
                 }));

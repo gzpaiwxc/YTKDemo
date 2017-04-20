@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:id="@+id/layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/red"
+              android:gravity="center"
+              android:orientation="vertical">
+
 
     <EditText
         android:id="@+id/edit_text"
-        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"/>
+
+    <com.colin.tiankong.customview.MyEditText
+        android:id="@+id/my_edit"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_white_round_10"
+        android:textColor="@color/white"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/tvReadTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:text="阅读理解" />
+        android:text="阅读理解"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tvGSWMX"
@@ -26,14 +40,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:text="古诗文默写" />
+        android:text="古诗文默写"
+        android:textColor="@color/black"/>
+
     <TextView
         android:id="@+id/tvWXTK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:text="完形填空" />
+        android:text="完形填空"
+        android:textColor="@color/black"/>
+
 </LinearLayout>
