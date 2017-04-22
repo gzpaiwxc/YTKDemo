@@ -29,4 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'io.reactivex:rxjava:1.0.1'
     compile 'com.android.support:recyclerview-v7:25.3.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

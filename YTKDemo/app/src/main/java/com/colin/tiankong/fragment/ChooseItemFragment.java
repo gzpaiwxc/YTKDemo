@@ -16,6 +16,8 @@ import com.colin.tiankong.utils.MyItemClickListener;
 import com.colin.tiankong.utils.RxBus;
 import com.colin.tiankong.utils.event.EventUpdateChooseWXTK;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 /**
@@ -55,7 +57,8 @@ public class ChooseItemFragment extends Fragment {
                     }
                 }
                 adapter.notifyDataSetChanged();
-                RxBus.getDefault().post(new EventUpdateChooseWXTK(index, adapter.list.get(postion).isChoosed, adapter.list.get(postion).body));
+//                RxBus.getDefault().post(new EventUpdateChooseWXTK(index, adapter.list.get(postion).isChoosed, adapter.list.get(postion).body));
+                EventBus.getDefault().post(new EventUpdateChooseWXTK(index, adapter.list.get(postion).isChoosed, adapter.list.get(postion).body));
             }
         },ChooseItemsAdapter.CHOOSE_TYPE);
         recyclerView.setAdapter(adapter);

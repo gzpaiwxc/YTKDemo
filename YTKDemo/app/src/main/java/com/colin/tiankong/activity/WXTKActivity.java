@@ -26,6 +26,10 @@ import com.colin.tiankong.utils.RxBus;
 import com.colin.tiankong.utils.ScreenUtil;
 import com.colin.tiankong.utils.event.EventUpdateChooseWXTK;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +63,8 @@ public class WXTKActivity extends FragmentActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         loadingView = findViewById(R.id.loadingView);
         initTextContent();
-        registerObserver();
+        EventBus.getDefault().register(this);
+//        registerObserver();
     }
 
     public void hideLoading() {
@@ -135,7 +140,9 @@ public class WXTKActivity extends FragmentActivity {
     private void scrollBy(final View v) {
         int[] location = new int[2];
         v.getLocationOnScreen(location);
+        Log.d("lianshou", "location[0]==>" + location[0] + "  location[1]==>" + location[1]);
         int y = location[1] + 10;
+        Log.d("lianshou", "y==>" + y + "   ==mViewPager.getTop()==>" + mViewPager.getTop() + "  ==ScreenUtil.dip2px(10)==>" + ScreenUtil.dip2px(10) + "====>" + (mViewPager.getTop() - ScreenUtil.dip2px(10)));
         if (y > mViewPager.getTop() - ScreenUtil.dip2px(10)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -151,7 +158,7 @@ public class WXTKActivity extends FragmentActivity {
         for (int j = 0; j < textViews.size(); j++) {
             TextView tv = textViews.get(j);
             if (tv.getText().toString().length() > 3) {
-                tv.setTextColor(Color.BLACK);
+                tv.setTextColor(Color.BLUE);
                 tv.setBackgroundResource(R.drawable.testbg_trans);
             } else {
                 tv.setBackgroundResource(R.drawable.testbg);
@@ -181,37 +188,63 @@ public class WXTKActivity extends FragmentActivity {
         mViewPager.setCurrentItem(0);
     }
 
-    private void registerObserver() {
-        subscription = RxBus.getDefault().toObserverable(EventUpdateChooseWXTK.class).subscribe(new Action1<EventUpdateChooseWXTK>() {
-            @Override
-            public void call(EventUpdateChooseWXTK eventUpdateChoose) {
-                TextView tv = textViews.get(eventUpdateChoose.index);
-                if (eventUpdateChoose.isChoosed) {
-                    tv.setText((eventUpdateChoose.index + 1) + " " + eventUpdateChoose.body);
-                    tv.setBackgroundResource(R.drawable.testbg_trans);
-                    tv.setTextColor(Color.BLACK);
-                    if (eventUpdateChoose.index + 1 < pagerAdapter.getCount()) {
-                        if (textViews.get(eventUpdateChoose.index + 1).getText().length() <= 2) {
-                            textViews.get(eventUpdateChoose.index + 1).setBackgroundResource(R.drawable.testbg_low);
-                            mViewPager.setCurrentItem(eventUpdateChoose.index + 1);
-                            scrollBy(textViews.get(eventUpdateChoose.index + 1));
-                            return;
-                        }
-                        mViewPager.setVisibility(View.GONE);
-                    }
-                } else {
-                    tv.setTextColor(Color.WHITE);
-                    tv.setText((eventUpdateChoose.index + 1) + " ");
-                    tv.setBackgroundResource(R.drawable.testbg);
-                }
+//    private void registerObserver() {
+//        subscription = RxBus.getDefault().toObserverable(EventUpdateChooseWXTK.class).subscribe(new Action1<EventUpdateChooseWXTK>() {
+//            @Override
+//            public void call(EventUpdateChooseWXTK eventUpdateChoose) {
+//                TextView tv = textViews.get(eventUpdateChoose.index);
+//                if (eventUpdateChoose.isChoosed) {
+//                    tv.setText((eventUpdateChoose.index + 1) + " " + eventUpdateChoose.body);
+//                    tv.setBackgroundResource(R.drawable.testbg_trans);
+//                    tv.setTextColor(Color.BLUE);
+//                    if (eventUpdateChoose.index + 1 < pagerAdapter.getCount()) {
+//                        if (textViews.get(eventUpdateChoose.index + 1).getText().length() <= 2) {
+//                            textViews.get(eventUpdateChoose.index + 1).setBackgroundResource(R.drawable.testbg_low);
+//                            mViewPager.setCurrentItem(eventUpdateChoose.index + 1);
+//                            scrollBy(textViews.get(eventUpdateChoose.index + 1));
+//                            return;
+//                        }
+//                        mViewPager.setVisibility(View.GONE);
+//                    }
+//                } else {
+//                    tv.setTextColor(Color.WHITE);
+//                    tv.setText((eventUpdateChoose.index + 1) + " ");
+//                    tv.setBackgroundResource(R.drawable.testbg);
+//                }
+//
+//            }
+//        });
+//    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EventUpdateChooseWXTK eventUpdateChoose) {
+        TextView tv = textViews.get(eventUpdateChoose.index);
+        if (eventUpdateChoose.isChoosed) {
+            tv.setText((eventUpdateChoose.index + 1) + " " + eventUpdateChoose.body);
+            tv.setBackgroundResource(R.drawable.testbg_trans);
+            tv.setTextColor(Color.BLUE);
+            if (eventUpdateChoose.index + 1 < pagerAdapter.getCount()) {
+                if (textViews.get(eventUpdateChoose.index + 1).getText().length() <= 2) {
+                    textViews.get(eventUpdateChoose.index + 1).setBackgroundResource(R.drawable.testbg_low);
+                    mViewPager.setCurrentItem(eventUpdateChoose.index + 1);
+                    scrollBy(textViews.get(eventUpdateChoose.index + 1));
+                    return;
+                }
+                mViewPager.setVisibility(View.GONE);
             }
-        });
+        } else {
+            tv.setTextColor(Color.WHITE);
+            tv.setText((eventUpdateChoose.index + 1) + " ");
+            tv.setBackgroundResource(R.drawable.testbg);
+        }
+//        Log.d("lianshou", "接受到了消息：" + eventUpdateChoose.index);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
+
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }

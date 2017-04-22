@@ -22,7 +22,6 @@ import com.colin.tiankong.customview.MyEditText;
  */
 
 public class MainActivity extends FragmentActivity {
-    private EditText editText;
     private LinearLayout layout;
 
     @Override
@@ -49,44 +48,34 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        editText = (EditText) findViewById(R.id.edit_text);
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    v.setBackgroundResource(R.drawable.btn_aqua_round_10);
-                } else {
-                    v.setBackgroundResource(R.drawable.btn_white_round_10);
-                }
-            }
-        });
-        LinearLayout myLinearLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams((int) getResources().getDimension(R.dimen.layout_width), (int) getResources().getDimension(R.dimen.layout_height));
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.gravity = Gravity.CENTER;
-        lp.rightMargin = 10;
-        myLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        TextView tvOption = new TextView(this);
-        MyEditText myEditText = new MyEditText(this);
-        tvOption.setText("1");
-        tvOption.setTextColor(Color.WHITE);
-        tvOption.setWidth((int) getResources().getDimension(R.dimen.tvoption_width));
-        tvOption.setHeight((int) getResources().getDimension(R.dimen.tvoption_height));
-        tvOption.setBackgroundResource(R.drawable.choosed_bg);
-        tvOption.setGravity(Gravity.CENTER);
-        tvOption.setLayoutParams(lp);
-        myEditText.setBackgroundResource(R.drawable.btn_white_round_10);
-        myEditText.setTextColor(Color.WHITE);
-        myEditText.setWidth((int) getResources().getDimension(R.dimen.edittext_width));
-        myEditText.setHeight((int) getResources().getDimension(R.dimen.edittext_height));
-        myEditText.setGravity(Gravity.CENTER);
-        myEditText.setTextSize(16);
-//        myEditText.setText("hello World");
-        myEditText.setLayoutParams(lp);
-        myLinearLayout.addView(tvOption);
-        myLinearLayout.addView(myEditText);
-        ll.topMargin = 20;
-        layout.addView(myLinearLayout,ll);
+//        //往屏幕中添加一个layout
+//        LinearLayout myLinearLayout = new LinearLayout(this);
+//        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams((int) getResources().getDimension(R.dimen.layout_width), (int) getResources().getDimension(R.dimen.layout_height));
+//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        lp.gravity = Gravity.CENTER;
+//        lp.rightMargin = 10;
+//        myLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+//        TextView tvOption = new TextView(this);
+//        MyEditText myEditText = new MyEditText(this);
+//        tvOption.setText("1");
+//        tvOption.setTextColor(Color.WHITE);
+//        tvOption.setWidth((int) getResources().getDimension(R.dimen.tvoption_width));
+//        tvOption.setHeight((int) getResources().getDimension(R.dimen.tvoption_height));
+//        tvOption.setBackgroundResource(R.drawable.choosed_bg);
+//        tvOption.setGravity(Gravity.CENTER);
+//        tvOption.setLayoutParams(lp);
+//        myEditText.setBackgroundResource(R.drawable.btn_white_round_10);
+//        myEditText.setTextColor(Color.WHITE);
+//        myEditText.setWidth((int) getResources().getDimension(R.dimen.edittext_width));
+//        myEditText.setHeight((int) getResources().getDimension(R.dimen.edittext_height));
+//        myEditText.setGravity(Gravity.CENTER);
+//        myEditText.setTextSize(16);
+////        myEditText.setText("hello World");
+//        myEditText.setLayoutParams(lp);
+//        myLinearLayout.addView(tvOption);
+//        myLinearLayout.addView(myEditText);
+//        ll.topMargin = 20;
+//        layout.addView(myLinearLayout,ll);
 
         hideInputMethod();
     }
